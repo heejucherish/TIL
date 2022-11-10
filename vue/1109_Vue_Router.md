@@ -73,20 +73,31 @@
   - 브라우저 히스토리 api를 활용한 방식
     - 새로고침 없이 url 이동 기록을 남길 수 있음 
     - 우리에게 익숙한 형식으로 url 구조로 사용가능
-- router-link
+
+- **router-link**
+
   - a 태그와 비슷한 기능 >  url을 이동시킴
+    - 페이지를 새로고침 하는것이 아님
     - routes 에 등록된 컴포넌트와 매핑됨
   - 목표 경로는 'to' 속성으로 지정됨 
   - 기능에 맞게 html 
+
 - router-html
   - 주어진 url에 대해 일치하는 컴포넌트를 렌더링 하는 컴포넌트
   - 실제component가 DOM에 부착되어 보이는 자리를 의미
   - 장고에서 block tag와 비슷 
 
+- router-view
+
+  - url 변경, 새로고침은 없지만 
+  - 컴포넌트가 바뀐다. 
+  - django에서 block tag와 비슷하다. 
+
 - components /views
   - 경로만 다르다
   - 하지만 **views에 들어있는 뷰들은 라우터랑 연결** 
   - **components : 라우터랑 연결 안되어있는 뷰** 
+
 - 주소를 이동하는 2가지 방법
   - 선언적 방식 네비게이션
   - ==프로그래밍 방식 네비게이션 (중요)==
@@ -96,9 +107,13 @@
   - router-link 'to' 속성으로 주소 전달
     - routes에 등록된 주소와 매핑된 컴포넌트 방식
 
-- 프로그래밍 방식 네비게이션
+- **프로그래밍 방식 네비게이션**
 
   - $router
+
+  - 이름으로 바인딩을 통해서 매핑하는 것 {name: '이름'}
+
+  - ==다만 HTML에서 직접 사용하기 보다는 data에 넣어서 사용하는 것을 권장!== 
 
   - 보낼때는 특정한 곳으로 이동하고 싶을때 
 
@@ -130,10 +145,19 @@
             }
         }
     
+    tethods :{
+    	toHome(){
+    	this.$rounter.push({name:'hello',params:{userName: this.inputData}})
+    }
+    }
+    
+    
+    
+    
     vue templeate
      <router-link :to="{ name: 'hello', params: {userName: 'ssafy'} }">Hello</router-link> 
     ```
-
+    
     
 
 - lazy-loading
@@ -153,22 +177,73 @@
 
 #### global before guard
 
-- router.beforeEach()
-- to : 이동할 url 정보가 담긴 라우터 객체
-- from: 현재 url 정보가 담긴 라우터 객체
-- next: 지정한 url 이동하기 위해 호출하는 함수
-  - 콜백 함수 내부에서 반드시 한번만 호출되어야함 
-  - 기본적으로 to에 해당하는 url로 이동 
+- **전역가드**
 
-- url이 변경되어 화면이 전환되기전 router.beforeEach() 가 호출됨
-- 변경된 url 로 라우팅 하기 위해서는 next()를 호출해야함
+  - 전국적으로 건뭄소를 세울때
 
-- 라우터 가드
+  - router.beforeEach()
 
-- 컴포넌트 가드
+  - ==콜백함수==
 
-  - beforeRouteUpdate()
+    - to : **이동할** url 정보가 담긴 라우터 객체
+
+    - from: **현재 url 정보**가 담긴 라우터 객체 
+
+    - next: **지정한 url 이동**하기 위해 호출하는 함수
+      - 콜백 함수 내부에서 ==반드시 한번만 호출==되어야함 
+      - 기본적으로 to에 해당하는 url로 이동 
+
+
+  - url이 변경되어 **화면이 전환되기전** **router.beforeEach()** 가 호출됨
+
+  - 변경된 url 로 라우팅 하기 위해서는 next()를 호출해야함
+
+
+- **라우터 가드**
+
+  - 특정 지역 검문소
+
+  - 특정 URL에서만 동작
+
+  - 로그인 여부에 따른 라우팅 처리
+
+  - **beforeEnter()**
+
+- **컴포넌트 가드**
+
+  - 특정 지역의 공간 검문소
+
+  - 라우터 컴포넌트 안에서 정의 
+
+  - 이친구는 매개변수가 변화하면 바뀐다. 
+
+  - **beforeRouteUpdate()**
+
     - 해당 컴포넌트 렌더링하는 url이 변경될때 실행되는 가드 
+
+      ```
+      befroreRouteUpdate(to, from ,next){
+      	this.userName = to.parmas.userName
+      }
+      ```
+
+
+- 전역가드만 콜백이고 나머지는 직접 호출된다!
+
+- **404 Not Foud**
+
+  - routes에 최 하단부에 작성해야한다
+
+    ```
+    const routes = [
+    {
+    	path:'*',
+    	redirect: '/404'
+    }
+    ]
+    ```
+
+    
 
 - axios
 
