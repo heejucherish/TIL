@@ -50,16 +50,15 @@
                   console.log(err)
                 })
               }
-        ----------------------------------------------------------------------
-           created() {
+        
+          ```
+        
+             created() {
               this.getArticles()
             },
             methods: {
               getArticles(){
                 this.$store.dispatch('getArticles')
-          ```
-        
-          
 
 ==하지만!==
 
@@ -104,6 +103,12 @@
         "corsheaders.middleware.CorsMiddleware",
         'django.middleware.common.CommonMiddleware',
           ]
+          
+          
+       CORS_ALLOWED_ORIGINS = [
+          'http://localhost:8080',
+      ]
+      
       ```
 
 
@@ -213,4 +218,10 @@ axios({
 `pip install drf-spectacular`
 
 
+
+python-decouple >api키나 이런부분들 숨겨줌 . 
+
+
+
+회사 갔을때 컨벤션...! 물어보기
 
