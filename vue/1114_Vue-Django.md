@@ -22,7 +22,7 @@
   - vue
 
     - 어떤 구조인지 확인
-    - 라우터 확인
+    - 라우터 확인하기
 
   - 그다음 둘을 연결하기 
 
@@ -50,7 +50,7 @@
                   console.log(err)
                 })
               }
-          ----------------------------------------------------------------------  
+        ----------------------------------------------------------------------
            created() {
               this.getArticles()
             },
@@ -58,7 +58,7 @@
               getArticles(){
                 this.$store.dispatch('getArticles')
           ```
-
+        
           
 
 ==하지만!==
@@ -182,7 +182,7 @@ url
           # 'rest_framework.permissions.IsAuthenticated',
           'rest_framework.permissions.AllowAny',
       ],
-  
+    
   ```
 
 - view 함수
